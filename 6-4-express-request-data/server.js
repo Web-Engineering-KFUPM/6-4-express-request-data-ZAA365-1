@@ -119,9 +119,23 @@ import express from "express";
 const app = express();
 app.listen(3000, ()=> console.log("API running at http://localhost:3000"));
 
+/*TODO-2 (/echo route):
+ * ============================================
+ *   - create GET /echo
+ *   - read "name" and "age" from req.query
+ *   - if name OR age missing → return 400 JSON: { ok:false, error:"name & age required" }
+ *   - else return JSON: { ok:true, name, age, msg:"Hello <name>, you are <age>" }
+ *   HINT:
+ *     app.get("/echo", (req,res)=>{ ... });
+ *     const {name, age} = req.query;*/
 // Query params: /echo?name=Ali&age=22
-
-
+app.get("/echo", (req,res)=>{
+   const {name, age} = req.query;
+if (!req.query.name || !req.query.age) {
+return res.status(400).json({ error: "name and age required" });
+}
+return res.json({ ok: true, name, age, msg: `Hello ${name}, you are ${age}` });
+});
 // Route params: /profile/First/Last
 
 
