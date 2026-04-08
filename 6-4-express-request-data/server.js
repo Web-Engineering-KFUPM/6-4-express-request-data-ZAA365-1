@@ -104,12 +104,20 @@ LAB SETUP INSTRUCTIONS
  *
  */
 
+ /*TODO-1 (Server Setup):
+ * ============================================
+ *   - create Express app instance
+ *   - start server on port 3000
+ *   - show console.log("API running at http://localhost:3000")
+ *   HINT: 
+ *     const app = express();
+ *     app.listen(3000, ()=> console.log(...));*/
 //import express
-
+import express from "express";
 
 // create express app instance to create web server
-
-
+const app = express();
+app.listen(3000, ()=> console.log("API running at http://localhost:3000"));
 
 // Query params: /echo?name=Ali&age=22
 
