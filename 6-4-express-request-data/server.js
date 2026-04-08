@@ -149,9 +149,23 @@ app.get("/profile/:first/:last", (req,res)=>{
    const { first, last } = req.params;
    return res.json({ ok: true, fullName: `${first} ${last}` });
  });
-
+/*TODO-4 (Param middleware):
+ * ============================================
+ *   - create app.param("userId", ...)
+ *   - convert userId to number
+ *   - if not a positive number → return 400 JSON: { ok:false, error:"userId must be positive number" }
+ *   - else store numeric value into req.userIdNum and call next()
+ *   HINT:
+ *     app.param("userId", (req,res,next,userId)=>{ ... });*/
 // Route param middleware example: /users/42
-
+app.param("userId", (req,res,next,userId)=>{ 
+   const userId = Number(req.params.userId); 
+   if (!Number.isFinite(userId) || userId <= 0) {
+     return res.status(400).json({ ok: false, error: "userId must be a positive number" });
+   }
+   req.userIdNum = userId;
+   next();
+ });
 
 // Route params: /users/:userId route
 
