@@ -117,7 +117,12 @@ import express from "express";
 
 // create express app instance to create web server
 const app = express();
-app.listen(3000, ()=> console.log("API running at http://localhost:3000"));
+app.use(express.json());
+
+// Root route
+app.get("/", (req, res) => {
+    res.send("just see server up");
+});
 
 /*TODO-2 (/echo route):
  * ============================================
@@ -159,11 +164,11 @@ app.get("/profile/:first/:last", (req,res)=>{
  *     app.param("userId", (req,res,next,userId)=>{ ... });*/
 // Route param middleware example: /users/42
 app.param("userId", (req,res,next,userId)=>{ 
-   const userId = Number(req.params.userId); 
-   if (!Number.isFinite(userId) || userId <= 0) {
+   const num = Number(req.params.userId); 
+   if (!Number.isFinite(num) || num <= 0) {
      return res.status(400).json({ ok: false, error: "userId must be a positive number" });
    }
-   req.userIdNum = userId;
+   req.userIdNum = num;
    next();
  });
 /*TODO-5 (/users/:userId route):
@@ -178,5 +183,6 @@ app.get("/users/:userId", (req, res) => { res.json({ ok: true, userId: req.userI
 
 
 // Start the server by listening
+app.listen(3000, ()=> console.log("API running at http://localhost:3000"));
 
 
