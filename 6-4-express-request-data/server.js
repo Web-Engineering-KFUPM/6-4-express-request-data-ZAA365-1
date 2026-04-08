@@ -136,8 +136,19 @@ return res.status(400).json({ error: "name and age required" });
 }
 return res.json({ ok: true, name, age, msg: `Hello ${name}, you are ${age}` });
 });
+/* * TODO-3 (/profile/:first/:last route):
+ * ============================================
+ *   - create GET /profile/:first/:last
+ *   - read first, last from req.params
+ *   - return JSON: { ok:true, fullName: "<first> <last>" }
+ *   HINT:
+ *     app.get("/profile/:first/:last", (req,res)=>{ ... });
+ *     const { first, last } = req.params;*/
 // Route params: /profile/First/Last
-
+app.get("/profile/:first/:last", (req,res)=>{ 
+   const { first, last } = req.params;
+   return res.json({ ok: true, fullName: `${first} ${last}` });
+ });
 
 // Route param middleware example: /users/42
 
