@@ -166,8 +166,15 @@ app.param("userId", (req,res,next,userId)=>{
    req.userIdNum = userId;
    next();
  });
-
+/*TODO-5 (/users/:userId route):
+ * ============================================
+ *   - create GET /users/:userId
+ *   - return JSON: { ok:true, userId: req.userIdNum }
+ *   HINT:
+ *     app.get("/users/:userId", (req,res)=>{ ... });
+ **/
 // Route params: /users/:userId route
+app.get("/users/:userId", (req, res) => { res.json({ ok: true, userId: req.userIdNum }); });
 
 
 // Start the server by listening
